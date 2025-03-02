@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public Action OnChangePOV;
     public Action<Vector2> OnMoveInput;
 
     public Action<bool> OnSprintInput;
@@ -62,7 +63,10 @@ public class InputManager : MonoBehaviour
         bool IsPressChangePOVInput = Input.GetKeyDown(KeyCode.Q);
         if (IsPressChangePOVInput)
         {
-            Debug.Log("Change POV");
+            if (OnChangePOV != null)
+            {
+                OnChangePOV();
+            }
         }
     }
 
