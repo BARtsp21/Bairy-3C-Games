@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -15,6 +16,14 @@ public class InputManager : MonoBehaviour
     public Action OnClimbInput;
 
     public Action OnCancelClimb;
+
+    public Action OnCrouchInput;
+
+    public Action OnGlideInput;
+
+    public Action OnCancelGlide;
+
+    public Action OnPunchInput;
     private void Update()
     {
         CheckJumpInput();
@@ -54,7 +63,7 @@ public class InputManager : MonoBehaviour
         bool IsPressCrouchInput = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl);
         if (IsPressCrouchInput)
         {
-            Debug.Log("Crouch");
+            OnCrouchInput();
         }
     }
 
@@ -84,7 +93,10 @@ public class InputManager : MonoBehaviour
         bool IsPressGlideInput = Input.GetKeyDown(KeyCode.G);
         if (IsPressGlideInput)
         {
-            Debug.Log("Glide");
+            if (OnGlideInput != null)
+            {
+                OnGlideInput();
+            }
         }
     }
 
@@ -97,6 +109,10 @@ public class InputManager : MonoBehaviour
             {
                 OnCancelClimb();
             }
+            if (OnCancelClimb != null)
+            {
+                OnCancelGlide();
+            }
         }
     }
 
@@ -105,7 +121,8 @@ public class InputManager : MonoBehaviour
         bool IsPressPunchInput = Input.GetKeyDown(KeyCode.Mouse0);
         if (IsPressPunchInput)
         {
-            Debug.Log("Punch");
+         OnPunchInput();
+           
         }
     }
 
@@ -132,6 +149,8 @@ public class InputManager : MonoBehaviour
             
         }
     }
+
+    
 
     
 }
