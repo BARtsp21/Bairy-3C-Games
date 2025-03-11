@@ -24,6 +24,8 @@ public class InputManager : MonoBehaviour
     public Action OnCancelGlide;
 
     public Action OnPunchInput;
+
+    public Action OnMainMenuInput;
     private void Update()
     {
         CheckJumpInput();
@@ -131,7 +133,10 @@ public class InputManager : MonoBehaviour
         bool IsMainMenuInput = Input.GetKeyDown(KeyCode.Escape);
         if (IsMainMenuInput)
         {
-            Debug.Log("Main Menu");
+            if (OnMainMenuInput != null)
+            {
+                OnMainMenuInput();
+            }
         }
     }
 
